@@ -6,17 +6,17 @@ import {
 } from "../types";
 
 export class WebLarekApi {
-  private _api: IApi;
+  private api: IApi;
 
   constructor(api: IApi) {
-    this._api = api;
+    this.api = api;
   }
 
   getProduct(): Promise<IProductResponse> {
-    return this._api.get<IProductResponse>("/product/");
+    return this.api.get<IProductResponse>("/product/");
   }
 
   postOrder(data: IOrderRequest): Promise<IOrderResponse> {
-    return this._api.post<IOrderResponse>("/order/", data);
+    return this.api.post<IOrderResponse>("/order/", data);
   }
 }

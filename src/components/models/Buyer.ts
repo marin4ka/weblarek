@@ -2,47 +2,47 @@ import { IBuyer } from "../../types";
 import { BUYER_VALIDATION_ERRORS } from "../../utils/constants";
 
 export class Buyer {
-  private _buyer: IBuyer;
+  private buyer: IBuyer;
 
-  constructor(buyer: IBuyer) {
-    this._buyer = {
-      payment: buyer.payment ?? undefined,
-      email: buyer.email ?? "",
-      phone: buyer.phone ?? "",
-      address: buyer.address ?? "",
+  constructor() {
+    this.buyer = {
+      payment: undefined,
+      email: "",
+      phone: "",
+      address: "",
     };
   }
 
   getDate() {
-    return this._buyer;
+    return this.buyer;
   }
 
   setData(buyer: Partial<IBuyer>) {
-    this._buyer = {
-      ...this._buyer,
+    this.buyer = {
+      ...this.buyer,
       ...buyer,
     };
   }
 
   clear() {
-    this._buyer.payment = undefined;
-    this._buyer.email = "";
-    this._buyer.phone = "";
-    this._buyer.address = "";
+    this.buyer.payment = undefined;
+    this.buyer.email = "";
+    this.buyer.phone = "";
+    this.buyer.address = "";
   }
 
-  validate(): Record<string, string> {
-    const errors: Record<string, string> = {};
-    if (!this._buyer.payment) {
+  validate(): Partial<Record<keyof IBuyer, string>> {
+    const errors: Partial<Record<keyof IBuyer, string>> = {};
+    if (!this.buyer.payment) {
       errors.payment = BUYER_VALIDATION_ERRORS.payment;
     }
-    if (!this._buyer.email) {
+    if (!this.buyer.email) {
       errors.email = BUYER_VALIDATION_ERRORS.email;
     }
-    if (!this._buyer.phone) {
+    if (!this.buyer.phone) {
       errors.phone = BUYER_VALIDATION_ERRORS.phone;
     }
-    if (!this._buyer.address) {
+    if (!this.buyer.address) {
       errors.address = BUYER_VALIDATION_ERRORS.address;
     }
     return errors;

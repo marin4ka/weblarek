@@ -1,37 +1,37 @@
 import { IProduct } from "../../types";
 
 export class ShoppingCart {
-  private _products: IProduct[];
+  private products: IProduct[];
 
   constructor(products: IProduct[]) {
-    this._products = products;
+    this.products = products;
   }
 
-  get products(): IProduct[] {
-    return this._products;
+  getProducts(): IProduct[] {
+    return this.products;
   }
 
   addProduct(product: IProduct) {
-    this._products.push(product);
+    this.products.push(product);
   }
 
   removeProduct(product: IProduct) {
-    this._products = this._products.filter((el) => el.id !== product.id);
+    this.products = this.products.filter((el) => el.id !== product.id);
   }
 
   clear() {
-    this._products = [];
+    this.products = [];
   }
 
   getTotalPrice(): number {
-    return this._products.reduce((sum, el) => sum + (el.price || 0), 0);
+    return this.products.reduce((sum, el) => sum + (el.price || 0), 0);
   }
 
   getProductCount() {
-    return this._products.length;
+    return this.products.length;
   }
 
   containsProduct(id: string): boolean {
-    return this._products.some((el) => el.id === id);
+    return this.products.some((el) => el.id === id);
   }
 }

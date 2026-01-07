@@ -1,30 +1,30 @@
 import { IProduct } from "../../types";
 
 export class Products {
-  private _products: IProduct[];
-  private _selectedProduct: IProduct | undefined = undefined;
+  private products: IProduct[];
+  private selectedProduct: IProduct | undefined = undefined;
 
   constructor(products: IProduct[]) {
-    this._products = products;
+    this.products = products;
   }
 
-  get products(): IProduct[] {
-    return this._products;
+  getProducts(): IProduct[] {
+    return this.products;
   }
 
-  set products(products: IProduct[]) {
-    this._products = products;
+  setProducts(products: IProduct[]) {
+    this.products = products;
   }
 
-  get selectedProduct(): IProduct | undefined {
-    return this._selectedProduct;
+  getSelectedProduct(): IProduct | undefined {
+    return this.selectedProduct;
   }
 
-  set selectedProduct(selectedProduct: IProduct | undefined) {
-    this._selectedProduct = selectedProduct;
+  setSelectedProduct(selectedProduct: IProduct | undefined) {
+    this.selectedProduct = selectedProduct;
   }
 
   getProductById(id: string): IProduct | undefined {
-    return this._products.find((el) => el.id === id);
+    return this.products.find((el) => el.id === id);
   }
 }

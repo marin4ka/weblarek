@@ -27,7 +27,7 @@ export class ShoppingCart {
     return this.products.reduce((sum, el) => sum + (el.price || 0), 0);
   }
 
-  getProductCount() {
+  getProductCount(): number {
     return this.products.length;
   }
 

@@ -13,7 +13,7 @@ export class Buyer {
     };
   }
 
-  getDate() {
+  getDate(): IBuyer {
     return this.buyer;
   }
 

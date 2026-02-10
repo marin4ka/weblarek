@@ -103,15 +103,23 @@ events.on("buyer:changed", () => {
   const errors = buyerModel.validate();
   const data = buyerModel.getData();
 
-  orderForm.payment = String(data.payment);
-
   const isErrorOrder = Boolean(errors.address) || Boolean(errors.payment);
   orderForm.setDisabled(isErrorOrder);
-  orderForm.error = errors.address || errors.payment || "";
 
   const isErrorContacts = Boolean(errors.email) || Boolean(errors.phone);
   contactsForm.setDisabled(isErrorContacts);
-  contactsForm.error = errors.email || errors.phone || "";
+
+  orderForm.render({
+    error: [errors.address, errors.payment].filter(Boolean).join("; ") || '',
+    payment: data.payment,
+    address: data.address,
+  });
+
+  contactsForm.render({
+    error: [errors.email, errors.phone].filter(Boolean).join("; ") || '',
+    email: data.email,
+    phone: data.phone,
+  });
 });
 
 events.on("card:select", (card: IProduct) => {

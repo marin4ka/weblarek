@@ -1,10 +1,11 @@
 import { IBuyer } from "../../types";
 import { BUYER_VALIDATION_ERRORS } from "../../utils/constants";
+import { IEvents } from "../base/Events";
 
 export class Buyer {
   private buyer: IBuyer;
 
-  constructor() {
+  constructor(protected events: IEvents) {
     this.buyer = {
       payment: undefined,
       email: "",
@@ -13,7 +14,7 @@ export class Buyer {
     };
   }
 
-  getDate(): IBuyer {
+  getData(): IBuyer {
     return this.buyer;
   }
 
@@ -22,6 +23,7 @@ export class Buyer {
       ...this.buyer,
       ...buyer,
     };
+    this.events.emit("buyer:changed");
   }
 
   clear() {
@@ -29,6 +31,7 @@ export class Buyer {
     this.buyer.email = "";
     this.buyer.phone = "";
     this.buyer.address = "";
+    this.events.emit("buyer:changed");
   }
 
   validate(): Partial<Record<keyof IBuyer, string>> {
